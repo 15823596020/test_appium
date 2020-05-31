@@ -1,3 +1,23 @@
+"""
+课后作业
+使用 Appium Inspector 录制企业微信搜索功能的测试用例，搜索一个存在的联系人。
+
+用例步骤：
+打开企业微信（提前登录）
+进入通讯录
+点击搜索按钮
+输入 已存在的联系人姓名, 例如“aa”，
+点击联系人，进入聊天页面
+输入“测试code”
+点击发送
+退出应用
+注意：
+
+提前登录，绕过登录功能( 加 noReset 参数 设置为 True)
+使用录制功能完成上面的功能，
+进行简单的重构，使用 pytest 测试框架。
+可以加入参数化，实现多条搜索功能的测试用例。
+"""
 import pytest
 from appium import webdriver
 from appium.webdriver.common.mobileby import MobileBy
@@ -12,7 +32,7 @@ class TestWechat:
         desired_caps['deviceName'] = '127.0.0.1:7555'  # 设备名字
         desired_caps['appPackage'] = 'com.tencent.wework'  # 需要打开的包名
         desired_caps['appActivity'] = 'com.tencent.wework.launch.WwMainActivity'  # 打开APP的第一个activity
-        desired_caps['noReset'] = True  # 记住之前的动作，不会清除之前的操作的一些换成信息
+        desired_caps['noReset'] = True  # 记住之前的动作，不会清除之前的操作的一些缓存信息
 
         self.driver = webdriver.Remote('http://127.0.0.1:4723/wd/hub', desired_caps)  # 打开APP，即跟server创建一个连接
         self.driver.implicitly_wait(5)
