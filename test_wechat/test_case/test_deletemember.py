@@ -1,7 +1,5 @@
 import pytest
-
 from test_appium.test_wechat.page.app import App
-
 
 class TestDeleteMember:
     def setup(self):
@@ -16,7 +14,6 @@ class TestDeleteMember:
         # ('小王4')
     ])
     def test_deletemember(self, name):
-        # self.app.main().goto_address().delete_member().goto_edit_message().edit_member().delete_name()
         # 这里最后一步点击确定后，是返回到AddressPage页的，这里保存这个页面
         addresspage = self.app.start().main().goto_address().delete_member(name).goto_edit_message().edit_member().delete_name()
         list = addresspage.search_member(name)  # 在这个页面调用search_member方法
