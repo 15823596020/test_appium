@@ -13,9 +13,18 @@ class AddressPage(BasePage):  # 继承BasePage类
 
     # 查找单个元素
     def search(self, name):
-        # 滚动查找成员
-        el = self.find(MobileBy.ANDROID_UIAUTOMATOR, f'new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text("{name}").instance(0));')
-        return el
+        # # 滚动查找成员
+        # el = self.find(MobileBy.ANDROID_UIAUTOMATOR, f'new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text("{name}").instance(0));')
+        # return el
+
+        # 捕获异常，如果查找到这个元素，就返回这个元素，否则就抛出异常
+        try:
+            # 滚动查找成员
+            el = self.find(MobileBy.ANDROID_UIAUTOMATOR, f'new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text("{name}").instance(0));')
+            return el
+
+        except Exception as no_name:
+            raise no_name
 
     # 查找多个元素，即查找元素列表
     def searchs(self, name):
