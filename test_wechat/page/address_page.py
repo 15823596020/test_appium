@@ -5,13 +5,20 @@ from test_appium.test_wechat.page.personal_detail_page import PersonalDetailsPag
 
 class AddressPage(BasePage):  # 继承BasePage类
     # 点击添加成员，进入添加成员页
-    def add_member(self):
-        # 滚动查找添加成员，并点击
-        self.find(MobileBy.ANDROID_UIAUTOMATOR, 'new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text("添加成员").instance(0));').click()
+    def add_member(self, value):
+        self.search(value).click()  # 调用查找单个元素方法search，这里查找添加成员这个元素，并进行点击
+        # # 滚动查找添加成员，并点击
+        # self.find(MobileBy.ANDROID_UIAUTOMATOR, 'new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text("添加成员").instance(0));').click()
         return AddMemberPage(self._driver)  # 实例化AddMemberPage，进入添加成员页
 
-    # 查找成员
-    def search_member(self, name):
+    # 查找单个元素
+    def search(self, name):
+        # 滚动查找成员
+        el = self.find(MobileBy.ANDROID_UIAUTOMATOR, f'new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text("{name}").instance(0));')
+        return el
+
+    # 查找多个元素，即查找元素列表
+    def searchs(self, name):
         # 滚动查找成员
         el_list = self.finds(MobileBy.ANDROID_UIAUTOMATOR, f'new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text("{name}").instance(0));')
         return el_list
@@ -23,6 +30,7 @@ class AddressPage(BasePage):  # 继承BasePage类
         2.点击该成员，进入个人信息页
         :return:
         """
-        # 滚动查找需删除的成员，并点击
-        self.find(MobileBy.ANDROID_UIAUTOMATOR, f'new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text("{name}").instance(0));').click()
+        self.search(name).click()  # 调用查找单个元素方法search，这里查找某个成员并点击
+        # # 滚动查找需删除的成员，并点击
+        # self.find(MobileBy.ANDROID_UIAUTOMATOR, f'new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text("{name}").instance(0));').click()
         return PersonalDetailsPage(self._driver)  # 实例化PersonalDetailsPage，进入个人信息页

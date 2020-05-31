@@ -16,7 +16,7 @@ class App(BasePage):  # 继承BasePage类
             self._driver = webdriver.Remote('http://127.0.0.1:4723/wd/hub', desired_caps)  # 打开APP，即跟server创建一个连接
         else:
             self._driver.launch_app()  # 否则就复用这个driver，并且启用app
-        self._driver.implicitly_wait(5)  # 隐士等待
+        self._driver.implicitly_wait(5)  # 隐式等待
         return self  # 初始化_driver后，返回自己
 
     # 重启app

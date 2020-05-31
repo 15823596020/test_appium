@@ -8,13 +8,13 @@ class TestAddMember:
     def teardown(self):
         pass
 
-    @pytest.mark.parametrize('name, gender, phone', [
-        ('小王2', '女', '17000001001'),
-        # ('小王3', '男', '17000001002'),
-        # ('小王4', '男', '17000001003')
+    @pytest.mark.parametrize('name, gender, phone, value', [
+        ('小王2', '女', '17000001001', '添加成员'),
+        # ('小王3', '男', '17000001002', '添加成员'),
+        # ('小王4', '男', '17000001003', '添加成员')
     ])
-    def test_addmember(self, name, gender, phone):
+    def test_addmember(self, name, gender, phone, value):
         # 这里最后一步点击保持后，是返回到AddMemberPage页的，这里保存这个页面
-        addmemberpage = self.app.start().main().goto_address().add_member().manual_input_add().set_name(name).set_gender(gender).set_phonenum(phone).click_save()
+        addmemberpage = self.app.start().main().goto_address().add_member(value).manual_input_add().set_name(name).set_gender(gender).set_phonenum(phone).click_save()
         tip = addmemberpage.get_toast()  # 在这个页面调用获取toast的方法
         assert tip == "添加成功"
