@@ -8,7 +8,7 @@ class TestMember:
         self.app = App()  # 实例化App类
 
     def teardown(self):
-        pass
+        self.app.stop()  # 调用退出应用方法
 
     # 读取测试数据文件
     def get_data():
